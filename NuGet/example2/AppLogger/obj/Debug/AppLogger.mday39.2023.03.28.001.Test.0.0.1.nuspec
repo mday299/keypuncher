@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>AppLogger.mday39.2023.03.28.001.Test</id>
+    <version>0.0.1</version>
+    <authors>Michael Day</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net7.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\bin\Debug\net7.0\AppLogger.dll" target="lib\net7.0\AppLogger.dll" />
+  </files>
+</package>

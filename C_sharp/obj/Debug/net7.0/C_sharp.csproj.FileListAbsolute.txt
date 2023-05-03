@@ -1,0 +1,15 @@
+C:\Users\mday39\dev\keypuncher\C_sharp\bin\Debug\net7.0\C_sharp.exe
+C:\Users\mday39\dev\keypuncher\C_sharp\bin\Debug\net7.0\C_sharp.deps.json
+C:\Users\mday39\dev\keypuncher\C_sharp\bin\Debug\net7.0\C_sharp.runtimeconfig.json
+C:\Users\mday39\dev\keypuncher\C_sharp\bin\Debug\net7.0\C_sharp.dll
+C:\Users\mday39\dev\keypuncher\C_sharp\bin\Debug\net7.0\C_sharp.pdb
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.csproj.AssemblyReference.cache
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.AssemblyInfoInputs.cache
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.AssemblyInfo.cs
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.csproj.CoreCompileInputs.cache
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.dll
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\refint\C_sharp.dll
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.pdb
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\C_sharp.genruntimeconfig.cache
+C:\Users\mday39\dev\keypuncher\C_sharp\obj\Debug\net7.0\ref\C_sharp.dll

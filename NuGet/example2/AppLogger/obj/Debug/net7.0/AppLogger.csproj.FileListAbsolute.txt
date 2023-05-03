@@ -1,0 +1,12 @@
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\bin\Debug\net7.0\AppLogger.deps.json
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\bin\Debug\net7.0\AppLogger.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\bin\Debug\net7.0\AppLogger.pdb
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\AppLogger.csproj.AssemblyReference.cache
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\AppLogger.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\AppLogger.AssemblyInfoInputs.cache
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\AppLogger.AssemblyInfo.cs
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\AppLogger.csproj.CoreCompileInputs.cache
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\AppLogger.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\refint\AppLogger.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\AppLogger.pdb
+C:\Users\mday39\dev\keypuncher\NuGet\example2\AppLogger\obj\Debug\net7.0\ref\AppLogger.dll

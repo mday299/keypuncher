@@ -1,0 +1,17 @@
+C:\Users\mday39\dev\keypuncher\NuGet\example1\bin\Debug\net7.0\example1.exe
+C:\Users\mday39\dev\keypuncher\NuGet\example1\bin\Debug\net7.0\example1.deps.json
+C:\Users\mday39\dev\keypuncher\NuGet\example1\bin\Debug\net7.0\example1.runtimeconfig.json
+C:\Users\mday39\dev\keypuncher\NuGet\example1\bin\Debug\net7.0\example1.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example1\bin\Debug\net7.0\example1.pdb
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.csproj.AssemblyReference.cache
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.AssemblyInfoInputs.cache
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.AssemblyInfo.cs
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.csproj.CoreCompileInputs.cache
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\refint\example1.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.pdb
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.genruntimeconfig.cache
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\ref\example1.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example1\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\mday39\dev\keypuncher\NuGet\example1\obj\Debug\net7.0\example1.csproj.CopyComplete
