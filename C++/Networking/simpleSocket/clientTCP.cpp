@@ -21,7 +21,7 @@ int main() {
     if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) == -1) {
         std::cerr << "Error connecting to server" << std::endl;
         close(clientSocket);
-        return 1;
+        return 2;
     }
 
     // Receive data from the server
