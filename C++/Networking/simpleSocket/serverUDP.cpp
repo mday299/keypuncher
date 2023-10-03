@@ -27,16 +27,16 @@ int main() {
     perror("setsockopt(SO_REUSEADDR) failed");
   }
 
-  if (bind(serverSocket, (struct sockaddr *)&serverAddress,
-           sizeof(serverAddress)) == -1) {
+  char buffer[1024];
+  sockaddr_in clientAddress;
+  socklen_t clientAddrLen = sizeof(clientAddress);
+
+  if (bind(serverSocket, (struct sockaddr *)&clientAddress,
+           sizeof(clientAddress)) == -1) {
     std::cerr << "Error binding socket" << std::endl;
     close(serverSocket);
     return 2;
   }
-
-  char buffer[1024];
-  sockaddr_in clientAddress;
-  socklen_t clientAddrLen = sizeof(clientAddress);
 
   // Receive data from the client
   ssize_t bytesRead =
