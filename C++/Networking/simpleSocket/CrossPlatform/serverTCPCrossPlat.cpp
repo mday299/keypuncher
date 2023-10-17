@@ -63,50 +63,49 @@ int main() {
 
     std::cout << "Server listening on port 12345..." << std::endl;
 
-    // Accept incoming connections
-    SOCKET clientSocket;
-    sockaddr_in clientAddress;
-    int clientAddressLength = sizeof(clientAddress);
-    clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLength);
-    if (clientSocket == INVALID_SOCKET) {
-        std::cerr << "Accept failed." << std::endl;
-        closesocket(serverSocket);
-#ifdef _WIN32
-        WSACleanup();
-#endif
-        return 1;
-    }
-
-    // Communication with the client
-    char buffer[1024];
-    int bytesRead;
     while (true) {
-        bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
-        if (bytesRead == 0)
+        // Accept incoming connections
+        struct sockaddr_in clientAddr;
+        int clientAddrSize = sizeof(clientAddr);
+        SOCKET clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &clientAddrSize);
+        if (clientSocket == INVALID_SOCKET) {
+            std::cerr << "Accept failed." << std::endl;
             break;
-        if (bytesRead == SOCKET_ERROR) {
-            std::cerr << "Receive error." << std::endl;
-            closesocket(clientSocket);
-            closesocket(serverSocket);
-#ifdef _WIN32
-            WSACleanup();
-#endif
-            return 1;
         }
-        // Handle received data
-        buffer[bytesRead] = '\0';
-        std::cout << "Received: " << buffer << std::endl;
 
-        // Echo the received data back to the client
-        send(clientSocket, buffer, bytesRead, 0);
+        std::cout << "Client connected." << std::endl;
+
+        // Main loop to receive and echo data
+        char buffer[1024];
+        int bytesRead;
+        while (true) {
+            bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
+            if (bytesRead <= 0) {
+                std::cerr << "Connection closed or error occurred." << std::endl;
+                break;
+            }
+
+            // Echo received data back to the client
+            send(clientSocket, buffer, bytesRead, 0);
+        }
+
+        // Close the client socket
+        #ifdef _WIN32
+            closesocket(clientSocket);
+        #else
+            close(clientSocket);
+        #endif
+
+        std::cout << "Client disconnected." << std::endl;
     }
 
-    // Close sockets and clean up
-    closesocket(clientSocket);
-    closesocket(serverSocket);
-#ifdef _WIN32
-    WSACleanup();
-#endif
+    // Cleanup and close the server socket
+    #ifdef _WIN32
+        closesocket(serverSocket);
+        WSACleanup();
+    #else
+        close(serverSocket);
+    #endif
 
     return 0;
 }
