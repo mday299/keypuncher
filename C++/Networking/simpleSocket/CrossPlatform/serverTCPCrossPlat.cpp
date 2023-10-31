@@ -66,8 +66,12 @@ int main() {
     while (true) {
         // Accept incoming connections
         struct sockaddr_in clientAddr;
-        int clientAddrSize = sizeof(clientAddr);
-        SOCKET clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, (socklen_t*)&clientAddrSize);
+        #ifdef _WIN32
+            int clientAddrSize = sizeof(clientAddr);
+        #else
+            socklen_t clientAddrSize = sizeof(clientAddr);
+        #endif
+        SOCKET clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &clientAddrSize);
         if (clientSocket == INVALID_SOCKET) {
             std::cerr << "Accept failed." << std::endl;
             break;
