@@ -1,69 +1,60 @@
+#include <iostream>
+#include <cstring>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
-#include <cstring>
-#include <iostream>
+const int PORT = 12345;
+const int BUFFER_SIZE = 1024;
 
 int main() {
-  // Create a socket
-  int serverSocket = socket(AF_INET, SOCK_DGRAM, 0);
-  if (serverSocket == -1) {
-    std::cerr << "Error creating socket" << std::endl;
-    return 1;
-  }
+    // Create socket
+    int serverSocket = socket(AF_INET, SOCK_DGRAM, 0);
+    if (serverSocket == -1) {
+        std::cerr << "Error creating socket: " << strerror(errno) << std::endl;
+        return -1;
+    }
 
-  // Bind the socket
-  sockaddr_in serverAddress;
-  std::memset(&serverAddress, 0, sizeof(serverAddress));
-  serverAddress.sin_family = AF_INET;
-  serverAddress.sin_port = htons(8888);  // Port number
-  serverAddress.sin_addr.s_addr =
-      INADDR_ANY;  // Bind to any available interface
+    // Bind to a specific port
+    sockaddr_in serverAddr;
+    memset(&serverAddr, 0, sizeof(serverAddr));
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serverAddr.sin_port = htons(PORT);
 
-  int reuse = 1;
-  if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &reuse,
-                 sizeof(reuse)) < 0) {
-    perror("setsockopt(SO_REUSEADDR) failed");
-  }
+    if (bind(serverSocket, reinterpret_cast<struct sockaddr*>(&serverAddr), sizeof(serverAddr)) == -1) {
+        std::cerr << "Error binding to port " << PORT << ": " << strerror(errno) << std::endl;
+        close(serverSocket);
+        return -1;
+    }
 
-  char buffer[1024];
-  sockaddr_in clientAddress;
-  socklen_t clientAddrLen = sizeof(clientAddress);
+    // Receive data from clients
+    char buffer[BUFFER_SIZE];
+    sockaddr_in clientAddr;
+    socklen_t clientAddrLen = sizeof(clientAddr);
 
-  if (bind(serverSocket, (struct sockaddr *)&clientAddress,
-           sizeof(clientAddress)) == -1) {
-    std::cerr << "Error binding socket" << std::endl;
+    while (true) {
+        int recvBytes = recvfrom(serverSocket, buffer, BUFFER_SIZE - 1, 0, reinterpret_cast<struct sockaddr*>(&clientAddr), &clientAddrLen);
+        if (recvBytes == -1) {
+            std::cerr << "Error receiving data: " << strerror(errno) << std::endl;
+            break;
+        }
+
+        buffer[recvBytes] = '\0';
+        std::cout << "Received from client: " << buffer << std::endl;
+
+        // You can add your processing logic here
+
+        // Send a response (optional)
+        const char* response = "Message received";
+        if (sendto(serverSocket, response, strlen(response), 0, reinterpret_cast<struct sockaddr*>(&clientAddr), clientAddrLen) == -1) {
+            std::cerr << "Error sending response: " << strerror(errno) << std::endl;
+            break;
+        }
+    }
+
+    // Close the socket
     close(serverSocket);
-    return 2;
-  }
 
-  // Receive data from the client
-  ssize_t bytesRead =
-      recvfrom(serverSocket, buffer, sizeof(buffer), 0,
-               (struct sockaddr *)&clientAddress, &clientAddrLen);
-  if (bytesRead == -1) {
-    std::cerr << "Error receiving data" << std::endl;
-    close(serverSocket);
-    return 1;
-  }
-
-  // Print received data
-  buffer[bytesRead] = '\0';
-  std::cout << "Received from client: " << buffer << std::endl;
-
-  // Respond to the client
-  const char *response = "Hello, client!";
-  ssize_t bytesSent = sendto(serverSocket, response, strlen(response), 0,
-                             (struct sockaddr *)&clientAddress, clientAddrLen);
-  if (bytesSent == -1) {
-    std::cerr << "Error sending data" << std::endl;
-    close(serverSocket);
-    return 1;
-  }
-
-  // Close socket
-  close(serverSocket);
-
-  return 0;
+    return 0;
 }
