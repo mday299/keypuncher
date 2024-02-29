@@ -2,7 +2,7 @@ repo_name: mday299/keypuncher
 report_id: 54170cd069515bbf7c382f4461540ea9
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-24T17:54:48+00:00'
+timestamp: '2024-02-29T19:37:30+00:00'
 requested_by: mday299
 provider: github
 branch: main
@@ -52,7 +52,7 @@ tools:
   detection_source_url: https://github.com/mday299/keypuncher
   detection_source: Repo Metadata
 - name: CMake
-  description: 'An open-source system that manages the build process '
+  description: An open-source system that manages the build process
   website_url: http://www.cmake.org/
   open_source: false
   hosted_saas: false
