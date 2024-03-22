@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include <winsock2.h>
 
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
@@ -9,24 +9,25 @@ int main() {
     WSADATA wsa;
     SOCKET s;
     struct sockaddr_in server;
-    char *message, server_reply[MAX_BUFFER];
+    const char *message;
+    char server_reply[MAX_BUFFER];
     int recv_size;
 
-    printf("\nInitialising Winsock...");
+    std::cout << "Initialising Winsock...";
     if (WSAStartup(MAKEWORD(2,2),&wsa) != 0) {
-        printf("Failed. Error Code : %d",WSAGetLastError());
+        std::cout << "Failed. Error Code : " << WSAGetLastError();
         return 1;
     }
 
-    printf("Initialised.\n");
+    std::cout << "Initialised.\n";
 
     //Create a socket
     if((s = socket(AF_INET , SOCK_STREAM , 0 )) == INVALID_SOCKET) {
-        printf("Could not create socket : %d" , WSAGetLastError());
+        std::cout << "Could not create socket : " << WSAGetLastError();
         return 1;
     }
 
-    printf("Socket created.\n");
+    std::cout << "Socket created.\n";
 
     server.sin_addr.s_addr = inet_addr("93.184.216.34"); // example.com's IP
     server.sin_family = AF_INET;
@@ -34,29 +35,30 @@ int main() {
 
     //Connect to remote server
     if (connect(s, (struct sockaddr *)&server, sizeof(server)) < 0) {
-        puts("connect error");
+        std::cout << "connect error";
         return 1;
     }
 
-    puts("Connected");
+    std::cout << "Connected\n";
 
     //Send some data
-    message = "GET / HTTP/1.1\r\nHost: example.com\r\n\r\n";
+    message = "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n";
     if (send(s, message, strlen(message), 0) < 0) {
-        puts("Send failed");
+        std::cout << "Send failed";
         return 1;
     }
-    puts("Data Send\n");
+    std::cout << "Data Send\n";
 
     //Receive a reply from the server
-    if((recv_size = recv(s, server_reply, MAX_BUFFER, 0)) == SOCKET_ERROR) {
-        puts("recv failed");
-        return 1;
+    while((recv_size = recv(s, server_reply, MAX_BUFFER-1, 0)) > 0) {
+        server_reply[recv_size] = '\0';
+        std::cout << server_reply;
     }
 
-    puts("Reply received\n");
-    server_reply[recv_size] = '\0';
-    puts(server_reply);
+    if(recv_size < 0) {
+        std::cout << "recv failed";
+        return 1;
+    }
 
     // Cleanup and close the connection
     closesocket(s);
