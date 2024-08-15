@@ -1,0 +1,19 @@
+syntax = "proto3";
+package example;
+
+message Position {
+    int32 aircraft_id = 1;
+    string aircraft_name = 2;
+    float lat_deg = 3;
+    float lon_deg = 4;
+    float alt_msl = 5; 
+
+    enum AltUnits {
+        METERS = 0;
+        FEET = 1;
+    }
+}
+
+message Planes {
+    repeated Position planes = 3;
+}
