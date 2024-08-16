@@ -12,9 +12,17 @@ void printPosition(const example::Position& position) {
 }
 
 int main(int argc, char* argv[]) {
-    GOOGLE_PRTOBUF_VERIFY_VERSION;
+    GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-    std::cout << "Howdy" << std:endl;
+    example::Position pos;
+    pos.set_aircraft_id(1);
+    pos.set_aircraft_name("ac 1");
+    pos.set_lat_deg(32.5);
+    pos.set_lon_deg(-33.4);
+    pos.set_alt_msl(100.1);
+    pos.set_alt_units(example::Position::METERS); 
 
-    printPostition();
+    printPosition(pos);
+
+    return 0;
 }
