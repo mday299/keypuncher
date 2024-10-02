@@ -4,14 +4,17 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 
 # Fetch the HTML list of Ubuntu mirrors and extract URLs of up-to-date mirrors
+#TODO: capture this launchpad list at the time of writing
 response = requests.get('https://launchpad.net/ubuntu/+archivemirrors')
-mirrors = re.findall(r'(f|ht)tp://[^\"]*', response.text)
-#filtered_mirrors = [mirror for mirror in mirrors if 'statusUP' in response.text]
-filtered_mirrors = [mirror for mirror in mirrors if 'statusUP' in response.text and 'United States' in response.text]
+#print(response.text)
+
+mirrors = re.findall(r'(https?://[^\"]+)', response.text)
+filtered_mirrors = [mirror for mirror in mirrors if 'statusUP' in response.text]
 
 # Function to test mirror speed
 def test_mirror_speed(mirror):
     try:
+        print(f"testing mirror {mirror}")
         result = subprocess.run(
             ['curl', '--max-time', '2', '-r', '0-102400', '-s', '-w', '%{speed_download}', '-o', '/dev/null', f'{mirror}/ls-lR.gz'],
             capture_output=True, text=True
@@ -20,6 +23,7 @@ def test_mirror_speed(mirror):
         speed_kbps = speed_bps / 1024
         return mirror, speed_kbps
     except Exception as e:
+        print(f"Error testing mirror {mirror}: {e}")
         return mirror, 0
 
 # Test each mirror with a 2-second timeout using ThreadPoolExecutor
