@@ -4,12 +4,11 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 
 # Fetch the HTML list of Ubuntu mirrors and extract URLs of up-to-date mirrors
-#TODO: capture this launchpad list at the time of writing
 response = requests.get('https://launchpad.net/ubuntu/+archivemirrors')
 #print(response.text)
 
 mirrors = re.findall(r'(https?://[^\"]+)', response.text)
-filtered_mirrors = [mirror for mirror in mirrors if 'statusUP' in response.text]
+filtered_mirrors = [mirror for mirror in mirrors if 'statusUP' in response.text.split(mirror)[1]]
 
 # Function to test mirror speed
 def test_mirror_speed(mirror):
