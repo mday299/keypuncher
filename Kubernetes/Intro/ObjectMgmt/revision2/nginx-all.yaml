@@ -1,0 +1,35 @@
+# Below is equivalent to:
+# kubectl run nginx-pod --image=nginx
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+  #annotations:
+  #  description: "Nginx Pod for learning purposes"
+spec:
+  containers:
+  - image: nginx
+    name: nginx-contauner
+    ports:
+      - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+  labels:
+    app: nginx
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+# Above is equivalent to:
+# kubectl expose pod nginx-pod --type=NodePort --port=80
+  selector:
+    app: nginx

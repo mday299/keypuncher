@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traffic-generator
+  labels:
+    app: traffic-generator
+spec:
+  containers:
+  - name: traffic-generator
+    image: lmacademy/traffic-generator:1.0.0
+    args: 
+    #NOTE: have to get the IP address every time we restart the traffic-generator!
+    #UNLESS we specify this from the color-api-clusterip!!
+      #- '10.103.177.189/api'
+      #HOWEVER, it is even more stable if you can use the DNS name!!
+      # provided by the coredns service of miikube
+      - 'color-api-clusterip/api'
+      - '0.5'
+
+    # resources:
+    #   limits:
+    #     memory: "128Mi"
+    #     cpu: "500m"
