@@ -1,8 +1,8 @@
 # Use an Alpine-based image with C++ support
-FROM alpine:latest
+FROM alpine:3.21.3
 
 # Install necessary build tools and dependencies
-RUN apk add --no-cache g++ make cmake
+RUN apk add --no-cache g++
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -12,9 +12,6 @@ COPY . .
 
 # Compile the C++ application
 RUN g++ -o app main.cpp
-
-# Expose the necessary port (adjust based on your application)
-EXPOSE 8080
 
 # Run the compiled application
 CMD ["./app"]
