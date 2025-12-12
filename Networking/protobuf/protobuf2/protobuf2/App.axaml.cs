@@ -1,8 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Google.Protobuf.Examples.AddressBook;
-using static Google.Protobuf.Examples.AddressBook.Person.Types;
 
 namespace protobuf2;
 
@@ -20,13 +20,7 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow();
         }
 
-        Person john = new Person
-        {
-            Id = 1234,
-            Name = "John Doe",
-            Email = "jdoe@example.com",
-            Phones = { new PhoneNumber { Number = "555-4321", Type = Person.Types.PhoneType.Home } }
-        };
+        SampleAdBookDBase addBook = new SampleAdBookDBase();
 
         base.OnFrameworkInitializationCompleted();
     }
