@@ -8,24 +8,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Avalonia UI packages -->
     <PackageReference Include="Avalonia" Version="11.3.9" />
     <PackageReference Include="Avalonia.Desktop" Version="11.3.9" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.9" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="MessageBox.Avalonia" Version="3.3.1" />
+
+    <!-- Diagnostics only in Debug -->
     <PackageReference Include="Avalonia.Diagnostics" Version="11.3.9">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
+
+    <!-- Protobuf support -->
     <PackageReference Include="Google.Protobuf" Version="3.33.2" />
     <PackageReference Include="Grpc.Tools" Version="2.76.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="MessageBox.Avalonia" Version="3.3.1" />
   </ItemGroup>
 
   <ItemGroup>
-      <Protobuf Include="AddressBook\AddressBook.proto" />
+    <!-- Protobuf file -->
+    <Protobuf Include="AddressBook\AddressBook.proto" />
   </ItemGroup>
+
+  <ItemGroup>
+    <!-- Reference to MAVLink.dll -->
+    <Reference Include="MAVLink">
+      <HintPath>libs\MAVLink.dll</HintPath>
+      <Private>true</Private> 
+      <CopyLocal>true</CopyLocal>
+    </Reference>
+  </ItemGroup>
+
 </Project>
