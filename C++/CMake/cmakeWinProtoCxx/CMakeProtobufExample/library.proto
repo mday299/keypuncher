@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package library;
+
+// Information about an Author
+message Author {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// Information about a Book
+message Book {
+  int32 id = 1;
+  string title = 2;
+  int32 author_id = 3;        // Foreign key to Author
+  int32 publication_year = 4;
+  string isbn = 5;
+  repeated string genres = 6;
+  bool checked_out = 7;
+}
+
+// Borrower (patron) details
+message Borrower {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// A record of a book being lent out
+message LendingRecord {
+  int32 id = 1;
+  int32 book_id = 2;      // Foreign key to Book
+  int32 borrower_id = 3;  // Foreign key to Borrower
+  string checkout_date = 4;
+  string due_date = 5;
+  string return_date = 6; // Empty if not yet returned
+}
+
+// Request to look up or add a book
+message LookupBookRequest {
+  oneof query {
+    int32 id = 1;
+    string isbn = 2;
+    string title = 3;
+  }
+}
+
+// Example response with books found
+message LookupBookResponse {
+  repeated Book books = 1;
+}
+
+// Add a new book to the catalog
+message AddBookRequest {
+  Book book = 1;
+}
+
+// Confirmation of book addition
+message AddBookResponse {
+  Book book = 1;
+  bool success = 2;
+  string message = 3;
+}
