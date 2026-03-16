@@ -2,9 +2,10 @@
   "version": 4,
   "configurePresets": [
     {
-      "name": "tutorial",
-      "displayName": "Tutorial Preset",
-      "description": "Preset to use with the tutorial",
+      "name": "default",
+      "displayName": "Default VS2022/VS2026",
+      "description": "Simple preset for Visual Studio Community",
+      "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "TUTORIAL_USE_STD_SQRT": "OFF",
@@ -13,3 +14,4 @@
     }
   ]
 }
+
