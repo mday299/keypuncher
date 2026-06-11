@@ -13,6 +13,14 @@ The main string is made up of first and last names and is equal to
  “John Doe.” The first substring is the first name. 
  The second substring is the last name. 
 Print the main string and two substrings afterward.
+
+Write a program that defines the main string with a value of 
+“Hello C++ World.” and checks if a single character ‘C’ is found
+ in the main string.
+
+ Write a program that defines the main string with a value of
+  “Hello C++ World.” and checks if a substring “C++” is found
+   in the main string.
 */
 
 #include <iostream>
@@ -39,6 +47,25 @@ int main() {
     std::cout << "Name: " << fullName << std::endl;
     std::cout << "First: " << firstName << std::endl;
     std::cout << "Last: " << lastName << std::endl;
+
+    //part 4
+    std::string hello = "Hello C++ World.";
+    char C = 'C';
+    auto iterator = hello.find(C);
+    if (iterator != std::string::npos) {
+        std::cout << "Character found at position: " << iterator << std::endl; 
+    } else {
+        std::cout << "Character not found." << std::endl;
+    }
+
+    //part 5
+    std::string cPlusPlus = "C++";
+    iterator = hello.find(cPlusPlus);
+    if (iterator != std::string::npos) {
+        std::cout << "Substring found at position: " << iterator << std::endl; 
+    } else {
+        std::cout << "Substring not found." << std::endl;
+    }
 
     return 0;
 }
