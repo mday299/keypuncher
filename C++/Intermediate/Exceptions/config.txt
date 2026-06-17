@@ -1,0 +1,7 @@
+# Example configuration
+port = 8080
+log_level = debug
+enable_cache = true
+timeout_ms = 2500
+#Uncomment this line to cause a parse error
+#will cause parse error
