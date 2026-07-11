@@ -58,7 +58,7 @@ int main() {
     // handle misaligned CUDA runtimes gracefully
     cudaError_t err = cudaGetLastError();
     if (err != cudaSuccess) {
-        std::cerr << "Kernel launch failed: " << cudaGetErrorString(err) << std::endl;
+        std::cerr << "CUDA kernel error: " << cudaGetErrorString(err) << std::endl;
     }
 
     //Copies the results from GPU memory (d_c) back into the host array (h_c).
