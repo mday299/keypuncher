@@ -1,3 +1,36 @@
+/* Template & Lambda Challenge Set (C++17)
+
+See:
+https://caiorss.github.io/C-Cpp-Notes/Libraries-and-featuresCPP17.html
+
+https://gieseanw.wordpress.com/2017/05/03/a-true-heterogeneous-container-in-c/
+
+2. Type‑safe heterogeneous container
+
+Implement a container that stores arbitrary types but enforces compile‑time 
+constraints on what can be inserted.
+
+Core idea:  
+A hetero_list<Ts...> that behaves like a type‑indexed tuple but supports runtime
+ push/pop with template dispatch.
+
+Requirements:
+
+    Use a variant of std::variant or your own tagged union.
+
+    Insertions must be rejected at compile time if the type doesn’t satisfy a
+     trait (e.g., is_copy_constructible).
+
+    Provide a visit_all using a lambda that is invoked for each stored element.
+
+Extensions:
+
+    Add a compile‑time “allowed types” policy.
+
+    Add a lambda‑based transform that returns a new hetero_list with 
+    transformed types.
+*/
+
 #include <iostream>
 #include <string>
 #include <variant>
