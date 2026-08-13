@@ -3,6 +3,8 @@
 See:
 https://caiorss.github.io/C-Cpp-Notes/Libraries-and-featuresCPP17.html
 
+https://gieseanw.wordpress.com/2017/05/03/a-true-heterogeneous-container-in-c/
+
 2. Type‑safe heterogeneous container
 
 Implement a container that stores arbitrary types but enforces compile‑time 
@@ -66,10 +68,10 @@ struct Point{
 };
 
 template<typename T>
-auto printInfo(std::any x) -> void {
+auto printInfo(const std::any& x) -> void {
     std::cout << " x.type = " << demangle(x.type().name())
               << " ; value(x) = "
-              << std::any_cast<T&>(x)
+              << std::any_cast<const T&>(x)
               << '\n';
 }
 
@@ -93,23 +95,36 @@ int main() {
     printInfo<Point>(x);
     std::cout << "Has value: x.has_value() = " << x.has_value() << '\n';
 
-    // x.reset();                                                         
-    // std::cout << "Has value: x.has_value() = " << x.has_value() << '\n';
+    std::cout << "Try valid casting " << std::endl;
+    try{
+        std::any_cast<Point>(x);
+    } catch (const std::bad_any_cast& ex) {
+        std::cerr << " >>> Exception: what = " << ex.what() << '\n'; 
+    }
+    std::cout << "Done with valid casting \n" << std::endl;
 
-    // std::cout << "Try casting " << std::endl;
-    // x = "testing type casting";
-    // try{
-    //     std::any_cast<int>(x);
-    // } catch (const std::bad_any_cast& ex) {
-    //     std::cerr << " >>> Exception: what = " << ex.what() << '\n'; 
-    // }
+    std::cout << "Try after reset() casting " << std::endl; 
+    x.reset();
+    x = "testing type casting";                                                        
+    std::cout << "Has value: x.has_value() = " << x.has_value() << '\n';
+    try{
+        std::any_cast<int>(x);
+    } catch (const std::bad_any_cast& ex) {
+        std::cerr << " >>> Exception: what = " << ex.what() << '\n'; 
+    }
+    std::cout << "Done with invalid casting after reset\n" << std::endl;
 
-    // x = "secont test type casting";
-    // try{
-    //     std::any_cast<Point>(x);
-    // } catch (const std::bad_any_cast& ex) {
-    //     std::cerr << " >>> Exception: what = " << ex.what() << '\n'; 
-    // }
+    std::cout << "Try valid cast on p " << std::endl; 
+    std::any p;
+    p.emplace<Point>(3100.0, -70.0);
+    printInfo<Point>(p);
+    std::cout << "Has value: p.has_value() = " << p.has_value() << '\n';  
+    try{
+        std::any_cast<Point>(p);
+    } catch (const std::bad_any_cast& ex) {
+        std::cerr << " >>> Exception: what = " << ex.what() << '\n'; 
+    }
+    std::cout << "Done with second valid cast\n" << std::endl;
 
     std::cerr << " >>> End the program gracefully" << '\n'; 
 
