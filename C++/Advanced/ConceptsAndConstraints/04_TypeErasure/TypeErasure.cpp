@@ -11,21 +11,30 @@ concept ILabel = requires(T v) {
 };
 
 // the Type Erasure Wrapper
+// This class acts as a single concrete 'Value Type' that hides (erases) the 
+// specific type of any object passed into it, providing value semantics.
 class AnyLabel {
 private:
     // the hidden blueprint (abstract base class interface)
     struct LabelInterface {
+        // Virtual destructor guarantees that when unique_ptr deletes this 
+        // interface pointer, the actual concrete derived class's destructor runs.
         virtual ~LabelInterface() = default;
+        //target hook for type execution
         virtual std::string callBuildHtml() const = 0;
     };
     
     // Generic contaner that implements the blueprint for a specific type T
+     // The constraint 'template <ILabel T>' catches non-conforming classes at compile-time.
     template <ILabel T>
     struct LabelImplementation : LabelInterface {
-        T concreteObject; 
+        T concreteObject; // Stores the eraseable object by value on the heap.
 
+        // Constructor moves or copies the external object into our internal storage.
         LabelImplementation(T value) : concreteObject(std::move(value)) {}
 
+        // Overrides the virtual hook to bridge run-time dynamic dispatch 
+        // with compile-time template duck typing.
         std::string callBuildHtml() const override {
             return concreteObject.buildHtml();
         }
