@@ -11,7 +11,7 @@ concept has_string_type = requires {
 //Concept Definition:
 template <class T>
 //keyword  name   assign sets up a local variable of Type t
-concept    ILabel  =     requires(T v) {                       // Simple (Can I call this?)
+concept    ILabel  =     requires(T v) {
     //Items of type T must have a method named buildHtml()
     {v.buildHtml()} ->
     //type constraint (on return type). T has a buildHtml can be implicitly convertered to std::string
